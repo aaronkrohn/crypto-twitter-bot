@@ -42,7 +42,7 @@ async function postToTwitter(prices) {
     }
 }
 
-const test = async () => {
+const run = async () => {
     const prices = await getCryptoPrices();
     console.log(prices);
 
@@ -50,13 +50,5 @@ const test = async () => {
         await postToTwitter(prices);
     }
 }
-test()
 
-// cron.schedule('0 9,17 * * *', async () => {
-//     console.log('Fetching and tweeting crypto prices...');
-//     const prices = await getCryptoPrices();
-//     console.log(prices);
-//     // if (prices) {
-//     //     await postToTwitter(prices);
-//     // }
-// });
+run()
