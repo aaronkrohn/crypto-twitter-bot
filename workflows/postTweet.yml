@@ -1,0 +1,29 @@
+name: Crypto Twitter Bot
+
+on:
+  schedule:
+    - cron: "*/15 * * * *"
+  workflow_dispatch:
+
+jobs:
+  run-twitter-bot:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v2
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v2
+        with:
+          node-version: '18'
+
+      - name: Install dependencies
+        run: npm install
+
+      - name: Run the bot
+        env:
+          TWITTER_APPKEY: ${{ secrets.TWITTER_APPKEY }}
+          TWITTER_APPSECRET: ${{ secrets.TWITTER_APPSECRET }}
+          TWITTER_ACCESSTOKEN: ${{ secrets.TWITTER_ACCESSTOKEN }}
+          TWITTER_ACCESSSECRET: ${{ secrets.TWITTER_ACCESSSECRET }}
+        run: npm run tweet
